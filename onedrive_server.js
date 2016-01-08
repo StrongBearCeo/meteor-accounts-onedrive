@@ -3,12 +3,8 @@ OneDrive = {};
 OAuth.registerService('onedrive', 2, null, function(query) {
   var tokens = getTokens(query);
   var accessToken = tokens.access_token;
-  console.log(']]]]')
-  console.log(accessToken)
-  console.log(tokens)
-  console.log('---')
   var identity = getIdentity(accessToken);
-  var expiresAt = (new Date).getTime()/1000 + tokens.expires_in; 
+  var expiresAt = (new Date).getTime()/1000 + tokens.expires_in;
 
   return {
     serviceData: {
@@ -16,7 +12,8 @@ OAuth.registerService('onedrive', 2, null, function(query) {
       accessToken: OAuth.sealSecret(accessToken),
       email: identity.emails.preferred,
       username: identity.login,
-      expiresAt:expiresAt
+      expiresAt: expiresAt,
+      token: tokens.refresh_token,
     },
     options: {profile: {name: identity.name}}
   };
@@ -63,7 +60,7 @@ var getIdentity = function (accessToken) {
   try {
     var response = HTTP.get(
       "https://apis.live.net/v5.0/me", {
-        headers: {"User-Agent": userAgent}, 
+        headers: {"User-Agent": userAgent},
         params: {access_token: accessToken}
       });
     return response.data;
