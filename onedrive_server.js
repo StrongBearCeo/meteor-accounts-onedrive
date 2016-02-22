@@ -3,6 +3,7 @@ OneDrive = {};
 OAuth.registerService('onedrive', 2, null, function(query) {
   var tokens = getTokens(query);
   var accessToken = tokens.access_token;
+  var refreshToken = tokens.refresh_token;
   var identity = getIdentity(accessToken);
   var expiresAt = (new Date).getTime()/1000 + tokens.expires_in;
 
@@ -13,7 +14,7 @@ OAuth.registerService('onedrive', 2, null, function(query) {
       email: identity.emails.preferred,
       username: identity.login,
       expiresAt: expiresAt,
-      refreshToken: tokens.refresh_token,
+      refreshToken: refreshToken,
     },
     options: {profile: {name: identity.name}}
   };
