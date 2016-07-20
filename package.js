@@ -1,12 +1,12 @@
 Package.describe({
   name: "maxkferg:accounts-onedrive",
   summary: "OneDrive OAuth flow",
-  version: "0.5.2",
+  version: "0.4.9",
   git: "https://github.com/maxkferg/meteor-accounts-onedrive.git"
 });
 
 Package.on_use(function(api) {
-  api.versionsFrom("METEOR@0.9.2")
+  api.versionsFrom("METEOR@0.9.2");
   api.use('oauth2', ['client', 'server']);
   api.use('oauth', ['client', 'server']);
   api.use('http', ['server']);
@@ -16,8 +16,8 @@ Package.on_use(function(api) {
   api.use('accounts-base', ['client', 'server']);
   api.use('service-configuration', ['client', 'server']);
 
-  api.export('Onedrive');
-
+  api.export('controlOneDrive', ['client', 'server']);
+  api.export('OneDrive', ['client']);
 
   api.add_files(['onedrive_configure.html', 'onedrive_configure.js'],'client');
 
