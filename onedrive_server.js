@@ -1,4 +1,4 @@
-OneDrive = {};
+controlOneDrive = {};
 
 OAuth.registerService('onedrive', 2, null, function(query) {
   var tokens = getTokens(query);
@@ -72,6 +72,6 @@ var getIdentity = function (accessToken) {
 };
 
 
-OneDrive.retrieveCredential = function(credentialToken, credentialSecret) {
+controlOneDrive.retrieveCredential = function(credentialToken, credentialSecret) {
   return OAuth.retrieveCredential(credentialToken, credentialSecret);
 };
